@@ -31,7 +31,7 @@ async function loadExistingForm() {
 
 function addQuestion(type) {
     const question = {
-        id: Date.now().toString(),
+        id: Date.now().toString() + '-' + Math.random().toString(36).substr(2, 9),
         type: type,
         title: 'Question',
         required: false,

@@ -144,23 +144,33 @@ function exportResponses() {
         return;
     }
     
+    // Helper function to escape CSV values
+    function escapeCSV(value) {
+        if (value === null || value === undefined) return '';
+        const stringValue = String(value);
+        if (stringValue.includes('"') || stringValue.includes(',') || stringValue.includes('\n')) {
+            return `"${stringValue.replace(/"/g, '""')}"`;
+        }
+        return `"${stringValue}"`;
+    }
+    
     // Create CSV header
     let csv = 'Submission Time,';
     form.questions.forEach(q => {
-        csv += `"${q.title}",`;
+        csv += escapeCSV(q.title) + ',';
     });
     csv = csv.slice(0, -1) + '\n';
     
     // Add data rows
     responses.forEach(response => {
-        csv += `"${new Date(response.submittedAt).toLocaleString()}",`;
+        csv += escapeCSV(new Date(response.submittedAt).toLocaleString()) + ',';
         
         form.questions.forEach(q => {
             let answer = response.answers[q.id] || '';
             if (Array.isArray(answer)) {
                 answer = answer.join('; ');
             }
-            csv += `"${answer}",`;
+            csv += escapeCSV(answer) + ',';
         });
         
         csv = csv.slice(0, -1) + '\n';

@@ -22,7 +22,24 @@ const storage = multer.diskStorage({
     cb(null, uniqueSuffix + path.extname(file.originalname));
   }
 });
-const upload = multer({ storage: storage });
+const upload = multer({ 
+  storage: storage,
+  limits: {
+    fileSize: 10 * 1024 * 1024 // 10MB limit
+  },
+  fileFilter: (req, file, cb) => {
+    // Allow common file types
+    const allowedTypes = /jpeg|jpg|png|gif|pdf|doc|docx|txt|csv|xlsx|xls/;
+    const extname = allowedTypes.test(path.extname(file.originalname).toLowerCase());
+    const mimetype = allowedTypes.test(file.mimetype);
+    
+    if (mimetype && extname) {
+      return cb(null, true);
+    } else {
+      cb(new Error('Invalid file type. Only images, PDFs, and documents are allowed.'));
+    }
+  }
+});
 
 // Data file paths
 const FORMS_FILE = path.join(__dirname, '../data/forms.json');
@@ -30,6 +47,10 @@ const RESPONSES_FILE = path.join(__dirname, '../data/responses.json');
 
 // Initialize data files if they don't exist
 function initializeDataFiles() {
+  const dataDir = path.join(__dirname, '../data');
+  if (!fs.existsSync(dataDir)) {
+    fs.mkdirSync(dataDir, { recursive: true });
+  }
   if (!fs.existsSync(FORMS_FILE)) {
     fs.writeFileSync(FORMS_FILE, JSON.stringify([], null, 2));
   }
@@ -42,8 +63,13 @@ initializeDataFiles();
 
 // Helper functions to read/write data
 function readForms() {
-  const data = fs.readFileSync(FORMS_FILE, 'utf8');
-  return JSON.parse(data);
+  try {
+    const data = fs.readFileSync(FORMS_FILE, 'utf8');
+    return JSON.parse(data);
+  } catch (error) {
+    console.error('Error reading forms:', error);
+    return [];
+  }
 }
 
 function writeForms(forms) {
@@ -51,8 +77,13 @@ function writeForms(forms) {
 }
 
 function readResponses() {
-  const data = fs.readFileSync(RESPONSES_FILE, 'utf8');
-  return JSON.parse(data);
+  try {
+    const data = fs.readFileSync(RESPONSES_FILE, 'utf8');
+    return JSON.parse(data);
+  } catch (error) {
+    console.error('Error reading responses:', error);
+    return [];
+  }
 }
 
 function writeResponses(responses) {
@@ -90,7 +121,7 @@ app.post('/api/forms', (req, res) => {
   try {
     const forms = readForms();
     const newForm = {
-      id: Date.now().toString(),
+      id: Date.now().toString() + '-' + Math.random().toString(36).substr(2, 9),
       ...req.body,
       createdAt: new Date().toISOString(),
       updatedAt: new Date().toISOString()
@@ -144,7 +175,7 @@ app.post('/api/responses', (req, res) => {
   try {
     const responses = readResponses();
     const newResponse = {
-      id: Date.now().toString(),
+      id: Date.now().toString() + '-' + Math.random().toString(36).substr(2, 9),
       ...req.body,
       submittedAt: new Date().toISOString()
     };
