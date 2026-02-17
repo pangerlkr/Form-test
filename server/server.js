@@ -29,11 +29,15 @@ const upload = multer({
   },
   fileFilter: (req, file, cb) => {
     // Allow common file types
-    const allowedTypes = /jpeg|jpg|png|gif|pdf|doc|docx|txt|csv|xlsx|xls/;
+    const allowedTypes = /jpeg|jpg|png|gif|pdf|doc|docx|txt|csv|xlsx|xls|plain/;
     const extname = allowedTypes.test(path.extname(file.originalname).toLowerCase());
-    const mimetype = allowedTypes.test(file.mimetype);
+    const mimetype = file.mimetype.includes('image') || 
+                     file.mimetype.includes('pdf') || 
+                     file.mimetype.includes('text') ||
+                     file.mimetype.includes('document') ||
+                     file.mimetype.includes('spreadsheet');
     
-    if (mimetype && extname) {
+    if (mimetype || extname) {
       return cb(null, true);
     } else {
       cb(new Error('Invalid file type. Only images, PDFs, and documents are allowed.'));
