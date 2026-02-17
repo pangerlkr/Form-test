@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form Responses - Form Builder</title>
+    <link rel="stylesheet" href="/css/styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <h1 class="logo">📋 Form Builder</h1>
+            <ul class="nav-links">
+                <li><a href="/index.html">Dashboard</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container main-content">
+        <div class="responses-header">
+            <h2 id="form-title">Form Responses</h2>
+            <button class="btn btn-secondary" onclick="exportResponses()">Export to CSV</button>
+        </div>
+
+        <div class="stats-overview">
+            <div class="stat-card">
+                <h3>Total Responses</h3>
+                <p id="total-responses" class="stat-number">0</p>
+            </div>
+        </div>
+
+        <div id="charts-container" class="charts-container">
+            <!-- Charts will be rendered here -->
+        </div>
+
+        <div class="responses-table-container">
+            <h3>Individual Responses</h3>
+            <table id="responses-table" class="responses-table">
+                <thead>
+                    <tr>
+                        <th>Submission Time</th>
+                        <th>Answers</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Responses will be loaded here -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script src="/js/responses.js"></script>
+</body>
+</html>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Form - Form Builder</title>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <h1 class="logo">📋 Form Builder</h1>
+            <ul class="nav-links">
+                <li><a href="/index.html">Dashboard</a></li>
+                <li><a href="/create-form.html" class="active">Create Form</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container main-content">
+        <div class="form-builder">
+            <div class="form-header-section">
+                <input type="text" id="form-title" class="form-title-input" placeholder="Untitled Form" value="Untitled Form">
+                <textarea id="form-description" class="form-description-input" placeholder="Form description"></textarea>
+                
+                <div class="form-settings">
+                    <h3>Form Customization</h3>
+                    <div class="settings-group">
+                        <label for="theme-color">Theme Color:</label>
+                        <input type="color" id="theme-color" value="#6200ea">
+                    </div>
+                    <div class="settings-group">
+                        <label for="header-image">Header Image URL:</label>
+                        <input type="text" id="header-image" placeholder="https://example.com/image.jpg">
+                    </div>
+                    <div class="settings-group">
+                        <label for="header-video">Header Video URL:</label>
+                        <input type="text" id="header-video" placeholder="https://www.youtube.com/embed/...">
+                    </div>
+                </div>
+            </div>
+
+            <div id="questions-container" class="questions-container">
+                <!-- Questions will be added here -->
+            </div>
+
+            <div class="add-question-section">
+                <button class="btn btn-secondary" onclick="addQuestion('text')">+ Short Answer</button>
+                <button class="btn btn-secondary" onclick="addQuestion('textarea')">+ Paragraph</button>
+                <button class="btn btn-secondary" onclick="addQuestion('multiple-choice')">+ Multiple Choice</button>
+                <button class="btn btn-secondary" onclick="addQuestion('checkbox')">+ Checkboxes</button>
+                <button class="btn btn-secondary" onclick="addQuestion('dropdown')">+ Dropdown</button>
+                <button class="btn btn-secondary" onclick="addQuestion('file')">+ File Upload</button>
+            </div>
+
+            <div class="form-actions">
+                <button class="btn btn-primary" onclick="saveForm()">Save Form</button>
+                <button class="btn btn-secondary" onclick="previewForm()">Preview</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="/js/form-builder.js"></script>
+</body>
+</html>

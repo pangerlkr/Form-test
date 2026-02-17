@@ -1,0 +1,28 @@
+{
+  "name": "form-test",
+  "version": "1.0.0",
+  "description": "Internal form builder platform similar to Google Forms for NGO/Company use",
+  "main": "index.js",
+  "scripts": {
+    "start": "node server/server.js",
+    "dev": "node server/server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pangerlkr/Form-test.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/pangerlkr/Form-test/issues"
+  },
+  "homepage": "https://github.com/pangerlkr/Form-test#readme",
+  "dependencies": {
+    "cors": "^2.8.6",
+    "express": "^5.2.1",
+    "multer": "^2.0.2"
+  }
+}
