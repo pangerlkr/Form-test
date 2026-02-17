@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form Builder - Internal Platform</title>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <h1 class="logo">📋 Form Builder</h1>
+            <ul class="nav-links">
+                <li><a href="/index.html" class="active">Dashboard</a></li>
+                <li><a href="/create-form.html">Create Form</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container main-content">
+        <div class="dashboard-header">
+            <h2>Your Forms</h2>
+            <a href="/create-form.html" class="btn btn-primary">+ Create New Form</a>
+        </div>
+
+        <div id="forms-grid" class="forms-grid">
+            <!-- Forms will be loaded here dynamically -->
+        </div>
+
+        <div id="empty-state" class="empty-state" style="display: none;">
+            <div class="empty-icon">📝</div>
+            <h3>No forms yet</h3>
+            <p>Create your first form to get started</p>
+            <a href="/create-form.html" class="btn btn-primary">Create Form</a>
+        </div>
+    </div>
+
+    <script src="/js/dashboard.js"></script>
+</body>
+</html>
