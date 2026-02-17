@@ -4,18 +4,28 @@ const API_URL = window.location.origin;
 async function loadForms() {
     try {
         const response = await fetch(`${API_URL}/api/forms`);
+
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
         const forms = await response.json();
-        
+
         const formsGrid = document.getElementById('forms-grid');
         const emptyState = document.getElementById('empty-state');
-        
+
+        // Ensure forms is an array before trying to use it
+        if (!Array.isArray(forms)) {
+            throw new Error('Invalid response format: expected an array');
+        }
+
         if (forms.length === 0) {
             formsGrid.style.display = 'none';
             emptyState.style.display = 'block';
         } else {
             formsGrid.style.display = 'grid';
             emptyState.style.display = 'none';
-            
+
             formsGrid.innerHTML = forms.map(form => `
                 <div class="form-card">
                     <h3>${form.title || 'Untitled Form'}</h3>
