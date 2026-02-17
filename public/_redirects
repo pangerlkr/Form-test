@@ -1,5 +1,7 @@
 # API endpoints redirect to Netlify functions
+/api/forms  /.netlify/functions/forms  200
 /api/forms/*  /.netlify/functions/forms/:splat  200
+/api/responses  /.netlify/functions/responses  200
 /api/responses/*  /.netlify/functions/responses/:splat  200
 /api/stats/*  /.netlify/functions/stats/:splat  200
 /api/upload  /.netlify/functions/upload  200
