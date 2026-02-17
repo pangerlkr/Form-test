@@ -154,6 +154,19 @@ To run in development mode:
 npm run dev
 ```
 
+## Netlify Deployment 🚀
+
+This project is configured for easy deployment on Netlify! See [NETLIFY_DEPLOYMENT.md](./NETLIFY_DEPLOYMENT.md) for detailed deployment instructions.
+
+**Quick Deploy:**
+1. Push this repository to GitHub
+2. Log in to [Netlify](https://app.netlify.com/)
+3. Click "Add new site" → "Import an existing project"
+4. Select this repository
+5. Deploy!
+
+The configuration is ready - Netlify will automatically detect the settings.
+
 ## Future Enhancements 🔮
 
 - User authentication and authorization
